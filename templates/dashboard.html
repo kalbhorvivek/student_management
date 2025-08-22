@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 class="mb-3">Dashboard</h2>
+<div class="row mb-4">
+  <div class="col-md-6">
+    <div class="card p-3 shadow">
+      <h5>Total Students: {{ students|length }}</h5>
+    </div>
+  </div>
+</div>
+
+<div class="card p-4 shadow">
+  <canvas id="classChart"></canvas>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+const ctx = document.getElementById('classChart');
+const myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: {{ classes|safe }},
+        datasets: [{
+            label: '# of Students',
+            data: {{ counts|safe }},
+            backgroundColor: 'rgba(54, 162, 235, 0.7)',
+        }]
+    },
+});
+</script>
+{% endblock %}

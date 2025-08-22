@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+  /* Full page background */
+  body {
+    background: url("{{ url_for('static', filename='images/Screenshot (108).png') }}") no-repeat center center fixed;
+    background-size: cover;
+    font-family: 'Poppins', sans-serif;
+    height: 100vh;
+  }
+
+  /* Centered login card */
+  .login-card {
+    backdrop-filter: blur(10px);
+    background-color: rgba(255, 255, 255, 0.9); /* solid but slight transparency */
+    border-radius: 20px;
+    padding: 40px 30px;
+    max-width: 400px;
+    width: 100%;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .login-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 45px rgba(0,0,0,0.35);
+  }
+
+  /* Heading */
+  .login-card h3 {
+    text-align: center;
+    color: #1E3A8A; /* school dark blue */
+    font-weight: 700;
+    margin-bottom: 30px;
+  }
+
+  /* Form inputs */
+  .form-control {
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 20px;
+    font-size: 16px;
+  }
+
+  /* Button */
+  .btn-primary {
+    border-radius: 10px;
+    background-color: #1E3A8A;
+    border: none;
+    font-weight: 600;
+    font-size: 16px;
+    padding: 10px;
+    transition: background 0.3s ease;
+  }
+
+  .btn-primary:hover {
+    background-color: #163270;
+  }
+
+  /* Register link */
+  .card-link {
+    color: #1E3A8A;
+    text-decoration: underline;
+  }
+
+  /* Center the card vertically */
+  .login-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+</style>
+
+<div class="login-container">
+  <div class="login-card">
+    <h3>Student Login</h3>
+    <form method="POST">
+      {{ form.hidden_tag() }}
+      <div class="mb-3">
+        {{ form.username.label(class="form-label") }}
+        {{ form.username(class="form-control") }}
+      </div>
+      <div class="mb-3">
+        {{ form.password.label(class="form-label") }}
+        {{ form.password(class="form-control") }}
+      </div>
+      <div class="d-grid mb-3">
+        {{ form.submit(class="btn btn-primary btn-lg") }}
+      </div>
+      <p class="text-center">
+        Don't have an account? <a href="{{ url_for('register') }}" class="card-link">Register</a>
+      </p>
+    </form>
+  </div>
+</div>
+{% endblock %}
